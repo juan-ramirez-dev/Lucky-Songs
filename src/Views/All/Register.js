@@ -35,7 +35,7 @@ const Register = () => {
                         playList : []
                     }
                     db.firestore.collection("Usuarios").doc().set(Datos)
-                    window.location.replace("/Lucky/#/Dashboard")
+                    window.location.replace("/Lucky-Songs/#/Dashboard")
                 })   
             }else{
                 Swal.fire({
@@ -72,7 +72,7 @@ const Register = () => {
 
                             <div className="bottom-login" >
                                 <h6 className="text-white" > Do you already have an account? </h6>
-                                <p className="pointer text-white" > <strong onClick={()=> window.location.replace("/Lucky/#/Login") } > Sign In </strong> </p>
+                                <p className="pointer text-white" > <strong onClick={()=> window.location.replace("/Lucky-Songs/#/Login") } > Sign In </strong> </p>
                             </div>
                         </div>
                     </div>

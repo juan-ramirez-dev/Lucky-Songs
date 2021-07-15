@@ -16,7 +16,7 @@ const OptionsMusic = ({data}) => {
                 setValidacion(true)
             }
         }else{
-            window.location.replace("/Lucky/#/Login")
+            window.location.replace("/Lucky-Songs/#/Login")
         }
     }
 

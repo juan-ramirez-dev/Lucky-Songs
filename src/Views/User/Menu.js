@@ -8,7 +8,7 @@ const Menu = ({cambiarInterfaz}) => {
 
     const Exit  = async () => {
         await firebase.auth().signOut()
-        window.location.replace("/Lucky/#/")
+        window.location.replace("/Lucky-Songs/#/")
     }
 
     return (

@@ -25,7 +25,7 @@ const Login = () => {
         if(email !== "" && pass !=="" && pass.length >= 6 ){
             firebase.auth().signInWithEmailAndPassword(email , pass)
             .then(res => {
-                window.location.replace("/Lucky/#/Dashboard")
+                window.location.replace("/Lucky-Songs/#/Dashboard")
             }).catch(error => {
                 Swal.fire({
                     icon : 'error',
@@ -59,7 +59,7 @@ const Login = () => {
                                 <button className="btn btn-outline-dark w-100" type="submit" > Sign In </button>
                             </form>
                         </div>
-                        <p className="text-center pointer mt-4" > You do not have an account? <span className="text-purple" onClick={()=> window.location.replace("/Lucky/#/Register") } > Sign Up </span>  </p>
+                        <p className="text-center pointer mt-4" > You do not have an account? <span className="text-purple" onClick={()=> window.location.replace("/Lucky-Songs/#/Register") } > Sign Up </span>  </p>
                     </div>
                 </div>
                 <div className="col-md-6 bg-purple d-flex align-items-center">

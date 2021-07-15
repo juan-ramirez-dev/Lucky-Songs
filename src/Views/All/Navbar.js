@@ -8,7 +8,7 @@ const Navbar = ({User}) => {
     const firebase = useFirebaseApp();
     const Exit  = async () => {
         await firebase.auth().signOut()
-        window.location.replace("/Lucky/#/")
+        window.location.replace("/Lucky-Songs/#/")
     }
 
 
@@ -28,12 +28,12 @@ const Navbar = ({User}) => {
                     </div>
                     {!User ? 
                         <div className="d-flex justify-content-center" >
-                            <button className="btn btn-outline-dark pointer m-2" onClick={()=> window.location.replace("/Lucky/#/Login") } > Sign In </button>
-                            <button className="btn btn-outline-dark pointer m-2" onClick={()=> window.location.replace("/Lucky/#/Register") } > Sign Up </button>
+                            <button className="btn btn-outline-dark pointer m-2" onClick={()=> window.location.replace("/Lucky-Songs/#/Login") } > Sign In </button>
+                            <button className="btn btn-outline-dark pointer m-2" onClick={()=> window.location.replace("/Lucky-Songs/#/Register") } > Sign Up </button>
                         </div>
                     :
                         <div>
-                            <h6 className="pointer" onClick={()=> window.location.replace("/Lucky/#/Dashboard") }  > User </h6>
+                            <h6 className="pointer" onClick={()=> window.location.replace("/Lucky-Songs/#/Dashboard") }  > User </h6>
                             <h6 className="pointer"  onClick={Exit} > Exit </h6>
                         </div>
                     }
@@ -56,22 +56,22 @@ const Navbar = ({User}) => {
                 </div>
                 <div className="col-md-6">
                     <div className="p-2 d-flex justify-content-center">
-                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky/#/") }  > Home </h6>
-                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky/#/Music") }  > Music </h6>
-                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky/#/Playlist") }  > Playlist </h6>
+                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky-Songs/#/") }  > Home </h6>
+                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky-Songs/#/Music") }  > Music </h6>
+                        <h6 className="m-2 pointer link-navbar" onClick={()=> window.location.replace("/Lucky-Songs/#/Playlist") }  > Playlist </h6>
                     </div>
                 </div>
                 <div className="col-md-3">
                     <div className="menu-navbar" >
                         {!User ? 
                             <div className="d-flex justify-content-center" >
-                                <button className="btn btn-outline-dark pointer p-2 m-2" onClick={()=> window.location.replace("/Lucky/#/Login") } > Sign In </button>
-                                <button className="btn btn-outline-dark pointer p-2 m-2" onClick={()=> window.location.replace("/Lucky/#/Register") } > Sign Up </button>
+                                <button className="btn btn-outline-dark pointer p-2 m-2" onClick={()=> window.location.replace("/Lucky-Songs/#/Login") } > Sign In </button>
+                                <button className="btn btn-outline-dark pointer p-2 m-2" onClick={()=> window.location.replace("/Lucky-Songs/#/Register") } > Sign Up </button>
                             </div>
                         :
                             <div>
                                 <div className="p-2 d-flex justify-content-center" >
-                                    <div className=" pointer rounded-circle shadow p-2 bg-aguamarine"  onClick={()=> window.location.replace("/Lucky/#/Dashboard") }     >
+                                    <div className=" pointer rounded-circle shadow p-2 bg-aguamarine"  onClick={()=> window.location.replace("/Lucky-Songs/#/Dashboard") }     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
                                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                         </svg>

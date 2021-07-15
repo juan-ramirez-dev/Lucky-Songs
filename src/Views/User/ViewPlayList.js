@@ -66,7 +66,7 @@ const ViewPlayList = ({data}) => {
                 </div>
             :
                 <div className="alert alert-warning m-5" >
-                    <p className="mt-2" > No tienes canciones en esta playList, dirigete a <strong className="pointer" onClick={()=> window.location.replace("/Lucky/#/") } > Home </strong> para agregar tus canciones favoritas. </p>
+                    <p className="mt-2" > No tienes canciones en esta playList, dirigete a <strong className="pointer" onClick={()=> window.location.replace("/Lucky-Songs/#/") } > Home </strong> para agregar tus canciones favoritas. </p>
                 </div>
             }
         </div>
