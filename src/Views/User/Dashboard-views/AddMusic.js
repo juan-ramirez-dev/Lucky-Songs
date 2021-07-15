@@ -7,12 +7,14 @@ import db from '../../../config/db.js'
 
 const AddMusic = ({user}) => {
 
+    const [Validacion, setValidacion] = useState(false)
     const [Campos, setCampos] = useState({
         name : "",
         author :"",
         gender : "",
         description : ""
     })
+
 
     const onChange = (e) => {
         setCampos({
@@ -29,6 +31,7 @@ const AddMusic = ({user}) => {
         const {name, gender, author, description} = Campos
         if(File.length > 0 && File[0].type === "audio/mpeg" && IMG.length > 0 && IMG[0].type === "image/jpeg" ){
             if(name !== "" && gender !== "" && author !=="" && description !== ""){
+                setValidacion(true)
                 const storage = firebase.storage().ref(`/Music/${File[0].name}`)
                 const task = storage.put(
                     File[0] , 
@@ -59,7 +62,8 @@ const AddMusic = ({user}) => {
                                     description: description,
                                     idUsuario : user.id,
                                     imagen : img,
-                                    imagenNombre : `/Img-Music/${IMG[0].name}`
+                                    imagenNombre : `/Img-Music/${IMG[0].name}`,
+                                    views : "0"
                                 }  
 
                                 user.songs.push(musicData)
@@ -70,7 +74,7 @@ const AddMusic = ({user}) => {
                                     playList : user.playList,
                                     songs : user.songs
                                 }
-        
+                                
                                 subirArchivos(userData)
                             })
                         })
@@ -103,6 +107,7 @@ const AddMusic = ({user}) => {
                 icon : "success",
                 title : "Canción subida correctamente."
             })
+            setValidacion(false)
             window.location.reload()
         })
     }
@@ -129,6 +134,13 @@ const AddMusic = ({user}) => {
                             <input type="file"     id="IMG" className="form-control w-100 m-2" />
                             <button type="submit" className="w-100 btn btn-outline-dark m-2" > Add Music </button>
                         </form>
+                        { Validacion?
+                            <div className="d-flex justify-content-center" >
+                                <div className="spinner-border text-dark" role="status">
+                                    <span className="visually-hidden"></span>
+                                </div>
+                            </div>
+                        :null}
                     </div>
                 </div>
             </div>

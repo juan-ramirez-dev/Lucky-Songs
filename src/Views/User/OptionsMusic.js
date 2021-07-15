@@ -29,18 +29,29 @@ const OptionsMusic = ({data}) => {
             denyButtonText: `No`,
           }).then(async (result) => {
             if (result.isConfirmed) {
-                lista.songs.push(data)
-                const consulta = await db.firestore.collection("Usuarios").where("id" , "==", state.id).get()
-                const id = consulta.docs[0].id
-                await db.firestore.collection("Usuarios").doc(id)
-                .update(state)
-                .then(res => {
-                    Swal.fire({
-                        icon : "success",
-                        title : "Canción agregada correctamente."
+                const validacion = lista.songs.filter(dato => dato.name === data.name)
+                if(!validacion.length > 0){
+                    lista.songs.push(data)
+                    const consulta = await db.firestore.collection("Usuarios").where("id" , "==", state.id).get()
+                    const id = consulta.docs[0].id
+                    await db.firestore.collection("Usuarios").doc(id)
+                    .update(state)
+                    .then(res => {
+                        Swal.fire({
+                            icon : "success",
+                            title : "Canción agregada correctamente."
+                        })
+                        window.location.reload()
                     })
-                    window.location.reload()
-                })
+                }else{
+                    Swal.fire({
+                        icon : "error",
+                        title: "Canción ya agregada",
+                        text : "Esta canción ya esta agregada a esta playList"
+                    })
+                }
+
+
             } 
           })
     }

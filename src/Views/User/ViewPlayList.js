@@ -1,8 +1,11 @@
 import React from 'react'
 import Swal from 'sweetalert2'
+import db from '../../config/db'
+import { useSelector } from 'react-redux'
 
 const ViewPlayList = ({data}) => {
 
+    const user = useSelector(state => state.user)
 
     const eliminarCancionPlayList = (song) => {
         Swal.fire({
@@ -13,7 +16,21 @@ const ViewPlayList = ({data}) => {
             denyButtonText: `No`,
           }).then( async (result) => {
             if (result.isConfirmed) {
-                console.log(song);
+                const newSongsPlayList = data.songs.filter(dato => dato.name !== song.name)
+                const list = user.playList.find(dato => dato.id === data.id)
+                list.songs = newSongsPlayList
+                const consulta = await db.firestore.collection("Usuarios").where("id", "==", user.id).get()
+                const id = consulta.docs[0].id
+                await db.firestore.collection("Usuarios").doc(id)
+                .update(user)
+                .then(res => {
+                    Swal.fire({
+                        icon : "success",
+                        title : "Canción eliminada correctamente."
+                    })
+                    window.location.reload()
+                })
+
             }
           })
     }
@@ -73,4 +90,4 @@ const ViewPlayList = ({data}) => {
     );
 }
  
-export default ViewPlayList;
+export default ViewPlayList
