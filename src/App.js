@@ -1,25 +1,94 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useEffect, useState} from 'react';
+import Navbar from './Views/All/Navbar';
+import Footer from './Views/All/Footer';
+import Rutas from './config/Router';
+import firebase from 'firebase';
+import { connect } from "react-redux";
+import db from './config/db';
 
-function App() {
+function App({ userData , agregarSesion , agregarMusic}) {
+
+  const [Validacion, setValidacion] = useState(false)
+
+  const CargarDatosUsuario = () => {
+      firebase.auth().onAuthStateChanged( async (user) => {
+        if(user){
+          const id = user.uid
+          const data = await db.firestore.collection("Usuarios").where("id", "==" , id ).get()
+          const datos = {
+              id : data.docs[0].data().id ,
+              playList : data.docs[0].data().playList, 
+              name : data.docs[0].data().name ,
+              songs : data.docs[0].data().songs 
+          }
+          agregarSesion(datos)
+          setValidacion(true)
+        }else{
+          agregarSesion(false)
+          setValidacion(true)
+        }
+      });
+  }
+
+  const CargarTodaslasCanciones = async () => {
+      let arregloSongs = []
+      const consulta = await db.firestore.collection("Usuarios").get()
+      if(consulta.docs.length > 0){
+          consulta.docs.forEach(element => {
+              const songs = element.data().songs
+              songs.forEach(data => {
+                arregloSongs.push(data)
+              })
+          })
+          agregarMusic(arregloSongs)
+      }else{
+        agregarMusic([])
+      }
+  }
+
+
+  useEffect(() => {
+      CargarDatosUsuario()
+      CargarTodaslasCanciones()
+      // eslint-disable-next-line
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {Validacion ? 
+        <div>
+          <Navbar User={userData} />
+          <Rutas  User={userData} />
+          <Footer User={userData} />
+        </div>
+      :null}
     </div>
   );
 }
 
-export default App;
+
+//Recuperando el state del store
+const mapStateToProps = state => ({
+  userData : state.user
+})
+
+
+//Creando un nuevo state con los datos del usuario
+const mapDispatchToProps = dispatch => ({
+  agregarSesion(user) {
+    dispatch({
+      type: "@agregarSesion",
+      user : user
+    })
+  },
+  agregarMusic(music) {
+    dispatch({
+      type: "@agregarMusic",
+      music : music
+    })
+  }
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
