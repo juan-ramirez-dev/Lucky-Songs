@@ -100,6 +100,14 @@ const reducer = (state = initialState , action) => {
         }
     }
 
+    if(type === "@quitarCancion"){
+        return {
+            ...state,
+            song : {},
+            playSong : ""
+        }
+    }
+
     
     return state
 }
