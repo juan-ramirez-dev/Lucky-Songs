@@ -5,6 +5,7 @@ import Rutas from './config/Router';
 import firebase from 'firebase';
 import { connect } from "react-redux";
 import db from './config/db';
+import Reproductor from './Views/All/Reproductor';
 
 function App({ userData , agregarSesion , agregarMusic}) {
 
@@ -60,6 +61,7 @@ function App({ userData , agregarSesion , agregarMusic}) {
         <div>
           <Navbar User={userData} />
           <Rutas  User={userData} />
+          <Reproductor />
           <Footer User={userData} />
         </div>
       :null}

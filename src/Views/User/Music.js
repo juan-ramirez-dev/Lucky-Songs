@@ -76,7 +76,7 @@ const Music = ({userData , eliminarCancionRedux , music }) => {
 
                             <div className="col-md-2" >
                                 <div className="my-2" >
-                                    <audio controls>
+                                    <audio controls className="w-100" >
                                         <source src={data.music} type="audio/mpeg" /> 
                                     </audio>
                                 </div>
