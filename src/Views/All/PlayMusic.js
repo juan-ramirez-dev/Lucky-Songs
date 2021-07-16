@@ -15,7 +15,7 @@ const PlayMusic = ({data}) => {
                             <img className="w-100" src={data.imagen} alt={data.imagenNombre} />
                         </div>
                         <div className="mt-2 d-flex justify-content-center" >
-                            <Audio />
+                            <Audio  song={data} />
                         </div>
                         <div className="mt-2 w-100" >
                             <OptionsMusic data={data} />

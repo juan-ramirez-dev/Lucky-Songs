@@ -21,7 +21,7 @@ const Reproductor = () => {
                             <img className="img-reproductor" src={song.imagen} alt={song.name} />
                         </div>
                         <div className="mt-2" >
-                            <Audio />
+                            <Audio song={song} />
                         </div>
                     </div>
                 </div>

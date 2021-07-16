@@ -1,12 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
 
-const Audio = () => {
-
-    let cancion = useSelector(store => store.playSong)
-
+const Audio = ({song}) => {
     return (
-        <audio autoPlay controls className="w-100" src={cancion} type="audio/mpeg" >
+        <audio autoPlay controls className="w-100" src={song.music} type="audio/mpeg" >
         
         </audio>
     );
